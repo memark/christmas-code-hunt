@@ -1,8 +1,10 @@
-use rocket::{get, http::Status, launch, routes};
+use rocket::{get, http::Status, routes};
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, error])
+#[shuttle_runtime::main]
+async fn main() -> shuttle_rocket::ShuttleRocket {
+    let rocket = rocket::build().mount("/", routes![index, error]);
+
+    Ok(rocket.into())
 }
 
 #[get("/")]
