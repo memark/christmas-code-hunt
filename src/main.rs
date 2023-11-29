@@ -1,13 +1,11 @@
-use rocket::{get, routes};
+use rocket::{get, launch, routes};
+
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/", routes![index])
+}
 
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
-}
-
-#[shuttle_runtime::main]
-async fn main() -> shuttle_rocket::ShuttleRocket {
-    let rocket = rocket::build().mount("/", routes![index]);
-
-    Ok(rocket.into())
 }
