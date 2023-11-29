@@ -1,0 +1,3 @@
+[toolchain]
+# As suggested here https://rocket.rs/v0.5/guide/getting-started/#installing-rust
+channel = "nightly"
