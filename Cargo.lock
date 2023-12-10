@@ -234,6 +234,7 @@ name = "cch23-memark"
 version = "0.1.0"
 dependencies = [
  "rocket",
+ "serde",
  "shuttle-rocket",
  "shuttle-runtime",
  "tokio",
@@ -1571,6 +1572,7 @@ dependencies = [
  "rocket_codegen",
  "rocket_http",
  "serde",
+ "serde_json",
  "state",
  "tempfile",
  "time",
