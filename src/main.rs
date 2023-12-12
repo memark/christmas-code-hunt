@@ -1,6 +1,5 @@
 use fancy_regex::Regex;
-use rocket::serde::json::Json;
-use rocket::{get, http::Status, post, routes};
+use rocket::{get, http::Status, post, routes, serde::json::Json};
 use serde::{Deserialize, Serialize};
 use std::{ops::BitXor, path::PathBuf};
 
