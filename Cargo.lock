@@ -252,6 +252,7 @@ dependencies = [
  "fancy-regex",
  "rocket",
  "serde",
+ "serde_json",
  "shuttle-rocket",
  "shuttle-runtime",
  "tokio",
