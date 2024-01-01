@@ -1,3 +1,5 @@
+mod day_8;
+
 use base64::Engine;
 use fancy_regex::Regex;
 use rocket::{
@@ -22,7 +24,9 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
             day_6,
             day_7_decode,
             day_7_bake,
-            day_7_bake2
+            day_7_bake2,
+            day_8::weight,
+            day_8::drop
         ],
     );
 
