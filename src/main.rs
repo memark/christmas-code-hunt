@@ -1,3 +1,4 @@
+mod day_1;
 mod day_4;
 mod day_6;
 mod day_8;
@@ -9,7 +10,7 @@ use rocket::{
     routes,
 };
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap, ops::BitXor, path::PathBuf};
+use std::collections::HashMap;
 
 #[shuttle_runtime::main]
 async fn main() -> shuttle_rocket::ShuttleRocket {
@@ -18,7 +19,7 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
         routes![
             index,
             error,
-            day_1,
+            day_1::nums,
             day_4::strength,
             day_4::contest,
             day_6::elf_count,
@@ -41,16 +42,6 @@ fn index() -> &'static str {
 #[get("/-1/error")]
 fn error() -> Status {
     Status::InternalServerError
-}
-
-#[get("/1/<nums..>")]
-fn day_1(nums: PathBuf) -> String {
-    nums.iter()
-        .map(|x| x.to_str().unwrap().parse().unwrap())
-        .reduce(i32::bitxor)
-        .unwrap()
-        .pow(3)
-        .to_string()
 }
 
 #[get("/7/decode")]
