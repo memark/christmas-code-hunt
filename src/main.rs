@@ -2,13 +2,10 @@ mod day_1;
 mod day_4;
 mod day_6;
 mod day_8;
+mod day_neg_1;
 
 use base64::Engine;
-use rocket::{
-    get,
-    http::{CookieJar, Status},
-    routes,
-};
+use rocket::{get, http::CookieJar, routes};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -18,7 +15,7 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
         "/",
         routes![
             index,
-            error,
+            day_neg_1::error,
             day_1::nums,
             day_4::strength,
             day_4::contest,
@@ -37,11 +34,6 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
-}
-
-#[get("/-1/error")]
-fn error() -> Status {
-    Status::InternalServerError
 }
 
 #[get("/7/decode")]
