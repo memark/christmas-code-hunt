@@ -1,13 +1,12 @@
 mod day_4;
+mod day_6;
 mod day_8;
 
 use base64::Engine;
-use fancy_regex::Regex;
 use rocket::{
     get,
     http::{CookieJar, Status},
-    post, routes,
-    serde::json::Json,
+    routes,
 };
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, ops::BitXor, path::PathBuf};
@@ -22,7 +21,7 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
             day_1,
             day_4::strength,
             day_4::contest,
-            day_6,
+            day_6::elf_count,
             day_7_decode,
             day_7_bake,
             day_7_bake2,
@@ -52,36 +51,6 @@ fn day_1(nums: PathBuf) -> String {
         .unwrap()
         .pow(3)
         .to_string()
-}
-
-#[post("/6", data = "<input>")]
-fn day_6(input: &str) -> Json<ElfCount> {
-    let elf = input.match_indices("elf").count();
-    let elf_on_a_shelf = Regex::new("(?<=elf on a )shelf")
-        .unwrap()
-        .find_iter(input)
-        .count();
-    let shelf_with_no_elf_on_it = Regex::new("(?<!elf on a )shelf")
-        .unwrap()
-        .find_iter(input)
-        .count();
-
-    Json(ElfCount {
-        elf,
-        elf_on_a_shelf,
-        shelf_with_no_elf_on_it,
-    })
-}
-
-#[derive(Serialize)]
-struct ElfCount {
-    elf: usize,
-
-    #[serde(rename = "elf on a shelf")]
-    elf_on_a_shelf: usize,
-
-    #[serde(rename = "shelf with no elf on it")]
-    shelf_with_no_elf_on_it: usize,
 }
 
 #[get("/7/decode")]
