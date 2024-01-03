@@ -3,6 +3,7 @@ mod day_4;
 mod day_6;
 mod day_8;
 mod day_neg_1;
+mod root;
 
 use base64::Engine;
 use rocket::{get, http::CookieJar, routes};
@@ -14,7 +15,7 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
     let rocket = rocket::build().mount(
         "/",
         routes![
-            index,
+            root::index,
             day_neg_1::error,
             day_1::nums,
             day_4::strength,
@@ -29,11 +30,6 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
     );
 
     Ok(rocket.into())
-}
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
 }
 
 #[get("/7/decode")]
