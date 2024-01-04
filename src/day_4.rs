@@ -1,7 +1,7 @@
 use rocket::{post, serde::json::Json};
 use serde::{Deserialize, Serialize};
 
-#[post("/4/strength", data = "<input>")]
+#[post("/strength", data = "<input>")]
 pub fn strength(input: Json<Vec<StrengthReindeer>>) -> String {
     input.iter().map(|x| x.strength).sum::<u32>().to_string()
 }
@@ -11,7 +11,7 @@ pub struct StrengthReindeer {
     strength: u32,
 }
 
-#[post("/4/contest", data = "<input>")]
+#[post("/contest", data = "<input>")]
 pub fn contest(input: Json<Vec<ContestReindeer>>) -> Json<ReindeerContestResult> {
     let fastest = input
         .iter()

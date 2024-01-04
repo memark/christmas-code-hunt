@@ -2,7 +2,7 @@ use fancy_regex::Regex;
 use rocket::{post, serde::json::Json};
 use serde::Serialize;
 
-#[post("/6", data = "<input>")]
+#[post("/", data = "<input>")]
 pub fn elf_count(input: &str) -> Json<ElfCount> {
     let elf = input.match_indices("elf").count();
     let elf_on_a_shelf = Regex::new("(?<=elf on a )shelf")

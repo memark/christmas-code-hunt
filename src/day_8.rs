@@ -1,14 +1,14 @@
 use rocket::get;
 use serde::Deserialize;
 
-#[get("/8/weight/<pokedex_number>")]
+#[get("/weight/<pokedex_number>")]
 pub async fn weight(pokedex_number: u32) -> String {
     let weight_kg = get_weight_in_kg_for_pokemon(pokedex_number).await;
 
     weight_kg.to_string()
 }
 
-#[get("/8/drop/<pokedex_number>")]
+#[get("/drop/<pokedex_number>")]
 pub async fn drop(pokedex_number: u32) -> String {
     let weight_kg = get_weight_in_kg_for_pokemon(pokedex_number).await;
     let momentum = weight_kg * get_vel_from_drop_height(10.0);

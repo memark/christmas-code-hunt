@@ -1,6 +1,6 @@
 use rocket::{get, http::Status};
 
-#[get("/-1/error")]
+#[get("/error")]
 pub fn error() -> Status {
     Status::InternalServerError
 }

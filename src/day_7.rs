@@ -3,14 +3,14 @@ use rocket::{get, http::CookieJar};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[get("/7/decode")]
+#[get("/decode")]
 pub fn decode(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();
     String::from_utf8(bytes).unwrap()
 }
 
-#[get("/7/bake")]
+#[get("/bake")]
 pub fn bake(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();
@@ -69,7 +69,7 @@ struct BakeResponse {
     pantry: Ingredients,
 }
 
-#[get("/7/bake2")]
+#[get("/bake2")]
 pub fn bake2(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();

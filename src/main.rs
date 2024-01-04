@@ -10,22 +10,14 @@ use rocket::routes;
 
 #[shuttle_runtime::main]
 async fn main() -> shuttle_rocket::ShuttleRocket {
-    let rocket = rocket::build().mount(
-        "/",
-        routes![
-            root::index,
-            day_neg_1::error,
-            day_1::nums,
-            day_4::strength,
-            day_4::contest,
-            day_6::elf_count,
-            day_7::decode,
-            day_7::bake,
-            day_7::bake2,
-            day_8::weight,
-            day_8::drop
-        ],
-    );
+    let rocket = rocket::build()
+        .mount("/", routes![root::index])
+        .mount("/-1", routes![day_neg_1::error])
+        .mount("/1", routes![day_1::nums])
+        .mount("/4", routes![day_4::strength, day_4::contest])
+        .mount("/6", routes![day_6::elf_count])
+        .mount("/7", routes![day_7::decode, day_7::bake, day_7::bake2,])
+        .mount("/8", routes![day_8::weight, day_8::drop]);
 
     Ok(rocket.into())
 }
