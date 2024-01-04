@@ -1,18 +1,23 @@
 use rocket::{post, serde::json::Json};
+use rocket::{routes, Route};
 use serde::{Deserialize, Serialize};
 
+pub fn get_routes() -> Vec<Route> {
+    routes![strength, contest]
+}
+
 #[post("/strength", data = "<input>")]
-pub fn strength(input: Json<Vec<StrengthReindeer>>) -> String {
+fn strength(input: Json<Vec<StrengthReindeer>>) -> String {
     input.iter().map(|x| x.strength).sum::<u32>().to_string()
 }
 
 #[derive(Deserialize)]
-pub struct StrengthReindeer {
+struct StrengthReindeer {
     strength: u32,
 }
 
 #[post("/contest", data = "<input>")]
-pub fn contest(input: Json<Vec<ContestReindeer>>) -> Json<ReindeerContestResult> {
+fn contest(input: Json<Vec<ContestReindeer>>) -> Json<ReindeerContestResult> {
     let fastest = input
         .iter()
         .max_by(|x, y| f32::total_cmp(&x.speed, &y.speed))
@@ -45,7 +50,7 @@ pub fn contest(input: Json<Vec<ContestReindeer>>) -> Json<ReindeerContestResult>
 }
 
 #[derive(Deserialize)]
-pub struct ContestReindeer {
+struct ContestReindeer {
     name: String,
     strength: u32,
     speed: f32,
@@ -58,7 +63,7 @@ pub struct ContestReindeer {
 }
 
 #[derive(Serialize)]
-pub struct ReindeerContestResult {
+struct ReindeerContestResult {
     fastest: String,
     tallest: String,
     magician: String,

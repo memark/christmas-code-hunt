@@ -1,15 +1,19 @@
-use rocket::get;
+use rocket::{get, routes, Route};
 use serde::Deserialize;
 
+pub fn get_routes() -> Vec<Route> {
+    routes![weight, drop]
+}
+
 #[get("/weight/<pokedex_number>")]
-pub async fn weight(pokedex_number: u32) -> String {
+async fn weight(pokedex_number: u32) -> String {
     let weight_kg = get_weight_in_kg_for_pokemon(pokedex_number).await;
 
     weight_kg.to_string()
 }
 
 #[get("/drop/<pokedex_number>")]
-pub async fn drop(pokedex_number: u32) -> String {
+async fn drop(pokedex_number: u32) -> String {
     let weight_kg = get_weight_in_kg_for_pokemon(pokedex_number).await;
     let momentum = weight_kg * get_vel_from_drop_height(10.0);
 

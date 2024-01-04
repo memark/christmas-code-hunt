@@ -1,9 +1,13 @@
 use fancy_regex::Regex;
-use rocket::{post, serde::json::Json};
+use rocket::{post, routes, serde::json::Json, Route};
 use serde::Serialize;
 
+pub fn get_routes() -> Vec<Route> {
+    routes![elf_count]
+}
+
 #[post("/", data = "<input>")]
-pub fn elf_count(input: &str) -> Json<ElfCount> {
+fn elf_count(input: &str) -> Json<ElfCount> {
     let elf = input.match_indices("elf").count();
     let elf_on_a_shelf = Regex::new("(?<=elf on a )shelf")
         .unwrap()
@@ -22,7 +26,7 @@ pub fn elf_count(input: &str) -> Json<ElfCount> {
 }
 
 #[derive(Serialize)]
-pub struct ElfCount {
+struct ElfCount {
     elf: usize,
 
     #[serde(rename = "elf on a shelf")]

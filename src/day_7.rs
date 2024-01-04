@@ -1,17 +1,21 @@
 use base64::Engine;
-use rocket::{get, http::CookieJar};
+use rocket::{get, http::CookieJar, routes, Route};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+pub fn get_routes() -> Vec<Route> {
+    routes![decode, bake, bake2]
+}
+
 #[get("/decode")]
-pub fn decode(cookies: &CookieJar<'_>) -> String {
+fn decode(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();
     String::from_utf8(bytes).unwrap()
 }
 
 #[get("/bake")]
-pub fn bake(cookies: &CookieJar<'_>) -> String {
+fn bake(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();
     let string = String::from_utf8(bytes).unwrap();
@@ -70,7 +74,7 @@ struct BakeResponse {
 }
 
 #[get("/bake2")]
-pub fn bake2(cookies: &CookieJar<'_>) -> String {
+fn bake2(cookies: &CookieJar<'_>) -> String {
     let base64 = cookies.get("recipe").unwrap().value();
     let bytes = base64::prelude::BASE64_STANDARD.decode(base64).unwrap();
     let string = String::from_utf8(bytes).unwrap();
