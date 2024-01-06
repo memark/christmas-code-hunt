@@ -3,6 +3,7 @@ mod day_04;
 mod day_06;
 mod day_07;
 mod day_08;
+mod day_11;
 mod day_neg_01;
 mod root;
 
@@ -15,7 +16,8 @@ async fn main() -> shuttle_rocket::ShuttleRocket {
         .mount("/4", day_04::get_routes())
         .mount("/6", day_06::get_routes())
         .mount("/7", day_07::get_routes())
-        .mount("/8", day_08::get_routes());
+        .mount("/8", day_08::get_routes())
+        .mount("/11", day_11::get_routes());
 
     Ok(rocket.into())
 }
