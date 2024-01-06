@@ -16,3 +16,4 @@ shuttle-persist = "0.35.2"
 shuttle-rocket = "0.35.0"
 shuttle-runtime = "0.35.0"
 tokio = "1.26.0"
+ulid = { version = "1.1.0", features = ["uuid"] }
