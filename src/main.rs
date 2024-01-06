@@ -1,3 +1,6 @@
+use shuttle_rocket::ShuttleRocket;
+use shuttle_runtime::main;
+
 mod day_01;
 mod day_04;
 mod day_06;
@@ -7,8 +10,8 @@ mod day_11;
 mod day_neg_01;
 mod root;
 
-#[shuttle_runtime::main]
-async fn main() -> shuttle_rocket::ShuttleRocket {
+#[main]
+async fn main() -> ShuttleRocket {
     let rocket = rocket::build()
         .mount("/-1", day_neg_01::get_routes())
         .mount("/", root::get_routes())
