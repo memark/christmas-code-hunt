@@ -9,6 +9,7 @@ mod day_07;
 mod day_08;
 mod day_11;
 mod day_12;
+mod day_20;
 mod day_neg_01;
 mod root;
 
@@ -25,7 +26,9 @@ async fn main(#[Persist] persist: PersistInstance) -> ShuttleRocket {
         .mount("/7", day_07::get_routes())
         .mount("/8", day_08::get_routes())
         .mount("/11", day_11::get_routes())
-        .mount("/12", day_12::get_routes());
+        .mount("/12", day_12::get_routes())
+        .mount("/20", day_20::get_routes());
+    // .data(10_i32.mebibytes());
 
     Ok(rocket.into())
 }
