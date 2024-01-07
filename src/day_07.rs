@@ -101,7 +101,9 @@ fn bake2(cookies: &CookieJar<'_>) -> String {
 
 #[derive(Debug, Deserialize)]
 struct BakeRequest2 {
+    #[allow(dead_code)]
     recipe: HashMap<String, u64>,
+    #[allow(dead_code)]
     pantry: HashMap<String, u64>,
 }
 
